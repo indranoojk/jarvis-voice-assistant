@@ -4,14 +4,12 @@ import datetime
 import wikipedia
 import webbrowser
 import os
-import smtplib
 
-# We will start an engine using pyttsx3 and sapi5 
+# starting an engine using pyttsx3 and sapi5 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-# print(voices)
-# print(voices[0].id)
-# We will set a male voice for our jarvis
+
+# setting a male voice
 engine.setProperty('voice', voices[0].id)
 
 
@@ -48,19 +46,11 @@ def takeCommand():
         print(f"User said: {query}\n")
 
     except Exception as e:
-        # print(e)
         print("Say that again please...")
         return "None"
     return query
 
 
-def sendEmail(to, content):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    server.login('yourname@gmail.com', 'password')
-    server.sendmail('yourname@gmail.com', to, content)
-    server.close()
 
 
 
@@ -138,17 +128,6 @@ if __name__ == "__main__":
             codePath = "C:\Program Files\Mozilla Firefox\\firefox.exe"
             os.startfile(codePath)
 
-
-        elif 'email to lucy' in query:
-            try:
-                speak("What should I say?")
-                content = takeCommand()
-                to = "yourname@gmail.com"
-                sendEmail(to, content)
-                speak("Email has been sent!")
-            except Exception as e:
-                print(e)
-                speak("Sorry! Unable to send this email.")
 
         elif 'quit' in query or 'terminate' in query:
             exit()
